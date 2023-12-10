@@ -1,0 +1,6 @@
+.idea/
+venv/
+**/__pycache__/
+data_start.json
+db.sqlite3
+.env
