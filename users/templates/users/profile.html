@@ -1,0 +1,35 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load catalog_tags %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container bg-green my-5">
+
+
+    <div class="row">
+        <div class=col-3></div>
+        <div class="col-6">
+            <h1 class="text-white p-3">
+                Профиль
+            </h1>
+
+            <form method="POST" class="p-3 fs-5 needs-validation" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-light my-3">
+                    Сохранить изменения
+                </button>
+                <a href="{% url 'catalog:index' %}" class="btn btn-light my-3">
+                    На главную
+                </a>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

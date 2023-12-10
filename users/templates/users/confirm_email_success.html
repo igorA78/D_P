@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load catalog_tags %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container bg-green my-5">
+
+
+    <div class="row">
+        <div class=col-3></div>
+        <div class="col-6">
+            <h1 class="text-white py-3">
+                Поздравляем!
+            </h1>
+            <h3 class="text-white py-3">
+                Регистрация успешно завершена!
+            </h3>
+
+            <a href="{% url 'users:login' %}" class="btn btn-light my-3">
+                Войти
+            </a>
+            <a href="{% url 'catalog:index' %}" class="btn btn-light my-3">
+                На главную
+            </a>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
