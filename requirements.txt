@@ -4,4 +4,4 @@ ipython
 pillow
 pytils
 python-decouple
-
+python-dotenv
