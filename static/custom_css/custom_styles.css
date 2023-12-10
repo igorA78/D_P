@@ -1,0 +1,54 @@
+body {
+    /*background-color: #d8d893;*/
+    background-color: #fafaf2;
+}
+
+.bg-green {
+    background-color: #a8c114;
+}
+
+.bg-light-green {
+    background-color: #f3f7dd;
+}
+
+.bg-dark-green {
+    background-color: #788a0b;
+}
+
+.bg-red {
+    background-color: #ac2c12;
+}
+
+.bg-light-orange {
+    background-color: #fff4d7;
+}
+
+.bg-orange {
+    background-color: #e48218;
+}
+
+.bg-custom-btn-orange {
+    background-color: #ffd152;
+}
+
+.text-color-green {
+    color: #788a0b;
+}
+
+.text-color-red {
+    color: #b4091c;
+}
+
+.text-color-orange {
+    color: #e48218;
+}
+
+
+.errorlist
+    {
+        color: #b4091c;
+        font-weight: bold;
+        list-style-type: none;
+        padding: 0;
+    }
+
