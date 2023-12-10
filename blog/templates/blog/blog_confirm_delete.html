@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+
+    <h1>Уверены, что хотите удалить эту статью?</h1>
+
+    <div class="d-flex pt-2">
+
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" class="btn btn-danger bg-red btn-lg border-0" value="Удалить">
+        </form>
+        <a href="{% url 'blog:list' %}"
+           class="text-white btn btn-success bg-dark-green btn-lg border-0 ms-3">
+            Отмена</a>
+    </div>
+
+</div>
+
+<div class="container bg-green my-5">
+    <div class="row p-3">
+        {% include 'blog/includes/inc_blog_detail.html' %}
+    </div>
+</div>
+
+{% endblock %}

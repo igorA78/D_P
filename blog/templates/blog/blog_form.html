@@ -1,0 +1,42 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container bg-green my-5">
+    <h1 class="text-white p-3">
+        {% if object %}
+        Редактирование статьи
+        {% else %}
+        Добавление новой статьи
+        {% endif %}
+    </h1>
+
+    <div class="row">
+        <div class="col-7">
+
+            <form method="POST" class="p-3 fs-5 needs-validation" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-light my-3">
+                    {% if object %}
+                    Изменить
+                    {% else %}
+                    Добавить
+                    {% endif %}
+                </button>
+            </form>
+        </div>
+
+        <div class="col-5 p-5">
+            <img src="{% static 'blog/img/create_article_icon.png' %}" class="img-fluid p-5">
+        </div>
+    </div>
+    <div class="row-col p-3">
+        <a href="{% url 'blog:list' %}" class="text-white">К списку статей</a>
+    </div>
+</div>
+{% endblock %}

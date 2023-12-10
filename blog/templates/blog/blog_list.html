@@ -1,0 +1,89 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container my-5 text-white">
+    <div class="row bg-green">
+        <div class="col-7 p-5 align-self-center">
+            <p class="fs-1">Блог про правильный образ жизни</p>
+            <p class="fs-5">Здесь собраны интересные и полезные статьи.
+            </p>
+        </div>
+        <div class="col-5 p-3">
+            <img src="{% static 'blog/img/new_img_list.png' %}" class="img-fluid"/>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row row-cols-4 g-4">
+        {% for object in object_list %}
+        <div class="col">
+            <div class="card bg-light-green h-100">
+
+                <a href="{% url 'blog:detail' object.pk %}">
+                    {% if object.preview != '' %}
+                    <img src="{{ object.preview|mediapath }}"
+                         class="card-img-top img-fluid p-3">
+                    {% else %}
+                    <img src="{% static 'blog/img/article_list_img_default.png' %}"
+                         class="card-img-top img-fluid p-3">
+                    {% endif %}
+                </a>
+                <div class="card-body pt-0">
+                    <h5 class="card-title">{{ object.title }}</h5>
+                    <hr>
+                    <p class="card-text">{{ object.message|safe|truncatechars:100 }}</p>
+                    <p class="card-text text-end">{{ object.created_at|date:'d E Y' }}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'blog:detail' object.pk %}"
+                       class="btn btn-success bg-dark-green
+                                      text-white border-0">
+                        Посмотреть
+                    </a>
+                    {% if perms.blog.content_manager or object.owner == request.user %}
+                    <a href="{% url 'blog:update' object.pk %}"
+                       class="btn btn-warning bg-custom-btn-orange border-0">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a href="{% url 'blog:delete' object.pk %}"
+                       class="btn btn-warning bg-custom-btn-orange border-0">
+                        <i class="bi bi-trash3"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+        <div class="col">
+            <div class="card bg-light-orange h-100">
+                <a href="{% url 'blog:create' %}">
+                    <img src="{% static 'blog/img/new_article_icon.png' %}"
+                         class="card-img-top img-fluid p-3">
+                </a>
+                <div class="card-body pt-0">
+                    <h5 class="card-title">Новая статья</h5>
+                    <hr>
+                    <p class="card-text">Здесь вы можете перейти к созданию новой записи.</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'blog:create' %}"
+                       class="btn btn-warning bg-orange
+                                      text-white border-0">
+                        Создать статью
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

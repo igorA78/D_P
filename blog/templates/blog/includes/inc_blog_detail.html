@@ -1,0 +1,18 @@
+{% load catalog_tags %}
+{% load static %}
+
+{% block blog_detail %}
+<div class="col-7 text-white">
+    <h1 class="">{{ object.title }}</h1>
+    <p class="pb-4 text-end">{{ object.created_at|date:'d.m.Y' }}</p>
+    <div class="fs-5 text-dark">{{ object.message|safe }}</div>
+    <p class="fs-5 text-end"><i class="bi bi-eye"></i> {{ object.views_count }}</p>
+</div>
+<div class="col-5 p-3 text-end align-self-center">
+    {% if object.preview != '' %}
+    <img src="{% mediapath object.preview %}" class="img-fluid">
+    {% else %}
+    <img src="{% static 'blog/img/article_detail_img_default.png' %}" class="img-fluid">
+    {% endif %}
+</div>
+{% endblock %}
