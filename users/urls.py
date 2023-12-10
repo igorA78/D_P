@@ -9,7 +9,7 @@ app_name = UsersConfig.name
 
 urlpatterns = [
     path('', LoginView.as_view(template_name='users/login.html', authentication_form=UserLoginForm), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('password_reset/', password_reset, name='password_reset'),
