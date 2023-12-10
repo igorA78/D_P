@@ -1,0 +1,82 @@
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
+{% load static %}
+
+
+{% block internal_navigation %}
+<ul class="nav justify-content-center">
+    {% for item in data %}
+    <li class="nav-item">
+        <a class="nav-link link-body-emphasis fs-5"
+           href="#{{ item.category.pk }}">
+            {{ item.category.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+{% block content %}
+<div class="container my-5 text-white">
+    <div class="row bg-green">
+        <div class="col-6 p-5 align-self-center">
+            <p class="fs-1">Медицинский центр предлагает воспользоваться нашими услугами</p>
+            <p class="fs-5">Диагностика, лечебный массаж и хирургия.
+            </p>
+        </div>
+        <div class="col-6">
+            <img src="{% static 'catalog/img/new_main_image.png' %}" class="img-fluid"/>
+        </div>
+    </div>
+</div>
+
+{% for item in data %}
+<div class="{% bg_light_color forloop.counter %} py-3">
+    <div class="container">
+        <h1 id="{{ item.category.pk }}" class="py-3 {% text_color forloop.counter %}">
+            {{ item.category.name }}
+        </h1>
+
+        <div class="container pb-5">
+            <div class="row row-cols-4 g-4">
+                {% for product in item.products %}
+                <div class="col">
+                    <div class="card {% bg_light_color forloop.parentloop.counter %} h-100">
+
+                        <a href="{% url 'catalog:view' product.pk %}">
+                            <img src="{% mediapath product.image %}"
+                                 class="card-img-top img-fluid pt-3">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name|slice:':23' }}</h5>
+                            <p class="card-text mb-0">Цена: {{ product.price }} Руб.</p>
+<!--                            {% if product.current_harvest %}-->
+<!--                            <p class="card-text">Cбор урожая: {{ product.current_harvest.harvest_date|date:'d.m.Y' }}</p>-->
+<!--                            {% endif %}-->
+                        </div>
+                        <div class="card-footer text-center">
+<!--                            <a href="#"-->
+<!--                               class="btn btn-warning-->
+<!--                                      {% bg_dark_color forloop.parentloop.counter %}-->
+<!--                                      text-white border-0">-->
+<!--                                Добавить в корзину-->
+<!--                            </a>-->
+                            {% if perms.catalog.can_moderate or product.owner == user %}
+                            <a href="{% url 'catalog:update' product.pk %}"
+                               class="btn btn-warning
+                                      {% bg_dark_color forloop.parentloop.counter %}
+                                      text-white border-0">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

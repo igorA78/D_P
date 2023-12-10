@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-7 bg-green">
+            <div class="row row-cols-2 text-white h-100">
+                {% for item in cont %}
+                <div class="col p-4 align-self-center">
+                    <h3><i class="bi {{ item.icon_bootstrap }}"></i> {{ item.name }}</h3>
+                    <p class="fs-5">{{ item.description | linebreaks }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-5 px-4">
+            <h3>Задать вопрос здесь</h3>
+            <form method="POST">
+<!--                <form method="POST" class="p-3 fs-5 needs-validation" enctype="multipart/form-data">-->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success bg-dark-green text-white border-0">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <div>
+        <img src="{% static 'catalog/img/new_contacts.png' %}" class="img-fluid">
+    </div>
+</div>
+{% endblock %}

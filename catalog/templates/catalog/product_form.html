@@ -1,0 +1,80 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load catalog_tags %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container bg-green my-5">
+    <h1 class="text-white p-3">
+        {% if object %}
+        Редактирование услуги
+        {% else %}
+        Добавление новой услуги
+        {% endif %}
+    </h1>
+
+    <div class="row">
+        <div class="col-6">
+            <form method="POST" class="p-3 fs-5 needs-validation" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-light my-3">
+                    {% if object %}
+                    Изменить
+                    {% else %}
+                    Добавить
+                    {% endif %}
+                </button>
+                <a href="{% url 'catalog:index' %}" class="btn btn-light my-3">
+                    На главную
+                </a>
+            </form>
+        </div>
+
+        {% if object %}
+        <div class="col-6 px-5 pt-1 fs-5">
+            <h4 class="text-white">Информация об регистрации обращения</h4>
+            {% for harvest in object.harvest_set.all %}
+            <table style="width:100%">
+                <tr>
+                    <td>Номер</td>
+                    <td>{{ harvest.harvest_number }}</td>
+                    <td rowspan="3">
+                        <a href="{% url 'catalog:update_harvest' harvest.pk %}" class="btn btn-outline-dark my-3">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Дата регистрации обращения</td>
+                    <td>{{ harvest.harvest_date }}</td>
+                </tr>
+                <tr>
+                    <td>Активное обращение</td>
+                    <td><input class="form-check-input" type="checkbox"
+                               {% if harvest.is_current %}
+                               checked
+                               {% endif %}
+                               disabled></td>
+                </tr>
+            </table>
+            <hr>
+            {% endfor %}
+            <div class="d-grid col-6 mx-auto">
+                <a href="{% url 'catalog:create_harvest' object.pk %}" class="btn btn-outline-dark btn-block">
+                Завести новое обращение
+            </a>
+            </div>
+
+        </div>
+        {% else %}
+        <div class="col-6 p-5 fs-5">
+            <img src="{% static 'catalog/img/nw_product_icon.png' %}" class="img-fluid p-5" alt="Новое обращение">
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

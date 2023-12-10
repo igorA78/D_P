@@ -1,0 +1,61 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load catalog_tags %}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container bg-green my-5">
+    <h1 class="text-white p-3">
+        {% if object %}
+        Редактирование регистрации услуги
+        {% else %}
+        Добавление новой регистрации услуги
+        {% endif %}
+    </h1>
+
+    <div class="row">
+        <div class="col-6">
+            <form method="POST" class="p-3 fs-5 needs-validation" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-light my-3">
+                    {% if object %}
+                    Изменить
+                    {% else %}
+                    Добавить
+                    {% endif %}
+                </button>
+                <a href="{% url 'catalog:index' %}" class="btn btn-light my-3">
+                    На главную
+                </a>
+            </form>
+        </div>
+
+        {% if object %}
+        <div class="col-6 px-5 pt-1 fs-5">
+            <h4 class="text-white">Информация об регистрации обращения</h4>
+            <h3>Категория: {{ harvest.product.category|lower }}</h3>
+            <h1 class="pt-4">{{ harvest.product.name }}</h1>
+            <p class="fs-5">{{ harvest.product.description }}</p>
+            <h3 class="py-4">Цена: {{ harvest.product.price }} Руб.</h3>
+<!--            <p>Первая регистрация: {{ harvest.product.created_at|date:'d.m.Y' }}<br/>-->
+<!--                Последние изменения: {{ harvest.product.changed_at|date:'d.m.Y' }}</p>-->
+        </div>
+        {% else %}
+        <div class="col-6 px-5 pt-1 fs-5">
+            <h4 class="text-white">Информация об услуге</h4>
+            <h3>Категория: {{ product.category|lower }}</h3>
+            <h1 class="pt-4">{{ product.name }}</h1>
+            <p class="fs-5">{{ product.description }}</p>
+            <h3 class="py-4">Цена: {{ product.price }} Руб.</h3>
+<!--            <p>Первые поставки: {{ product.created_at|date:'d.m.Y' }}<br/>-->
+<!--                Последние изменения: {{ product.changed_at|date:'d.m.Y' }}</p>-->
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

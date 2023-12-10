@@ -1,0 +1,26 @@
+<div class="collapse bg-green pe-0" id="navbarHeader">
+    <div class="container pe-0">
+        <nav class="navbar navbar-expand-lg pe-0">
+            <div class="container-fluid pe-0">
+                <div class="collapse navbar-collapse justify-content-end me-0" id="navbarNavAltMarkup">
+                    <div class="navbar-nav fs-5">
+                        <a class="link-light link-offset-2  link-underline-opacity-0 link-underline-opacity-100-hover
+                           text-white border-end border-white px-3"
+                           href="{% url 'catalog:index' %}">Главная</a>
+                        <a class="link-light link-offset-2  link-underline-opacity-0 link-underline-opacity-100-hover
+                           text-white border-end border-white px-3"
+                           href="{% url 'blog:list' %}">Блог</a>
+                        <a class="link-light link-offset-2  link-underline-opacity-0 link-underline-opacity-100-hover
+                           text-white border-end border-white px-3"
+                           href="{% url 'catalog:contact' %}">Контакты</a>
+                        {% if request.user.is_authenticated %}
+                        <a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover
+                           text-white px-3"
+                           href="{% url 'catalog:create' %}">Добавить услугу</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

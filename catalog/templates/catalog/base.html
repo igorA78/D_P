@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Медицинская диагностика</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="{% static 'custom_css/custom_styles.css' %}" rel="stylesheet">
+</head>
+
+
+<body class="d-flex flex-column min-vh-100">
+<header class="container">
+    <div class="row">
+        {% include 'catalog/includes/inc_main_menu.html' %}
+        <nav id="navbar" class="navbar">
+            <div class="col-3">
+                <p class=" text-uppercase fs-3 text-color-green m-0" href="/"><b>Медицинская диагностика</b></p>
+            </div>
+            <div class="col-5">
+                {% block internal_navigation %}
+                {% endblock %}
+            </div>
+            <div class="col-4  text-end">
+                {% if user.is_authenticated %}
+                   <a class="btn btn-outline-secondary me-2" href="{% url 'users:logout' %}">Выйти</a>
+                   <a class="btn btn-outline-secondary me-2" href="{% url 'users:profile' %}">Профиль</a>
+                {% else %}
+                   <a class="btn btn-outline-secondary me-2" href="{% url 'users:login' %}">Войти</a>
+                   <a class="btn btn-outline-secondary me-2" href="{% url 'users:register' %}">Регистрация</a>
+                {% endif %}
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<main role="main">
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+<footer class="container-fluid mt-auto bg-green py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 text-center fs-5">
+                &copy; Company 2023–{% now 'Y' %}
+            </div>
+            <div class="col-4 fs-5">
+                <a href="#" class="float-end link-offset-2 link-dark
+                link-underline-opacity-25 link-underline-opacity-100-hover">
+                    Наверх
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

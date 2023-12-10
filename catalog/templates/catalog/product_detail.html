@@ -1,0 +1,41 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load catalog_tags%}
+
+{% block internal_navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="container bg-green my-5">
+    <div class="row p-3">
+        <div class="col-6 text-white">
+            <h3>Категория: {{ object.category|lower }}</h3>
+            <h1 class="pt-4">{{ object.name }}</h1>
+            <p class="fs-5">{{ object.description }}</p>
+            <h3 class="py-4">Цена:
+                {% if object.price %}
+                    {{ object.price }} Руб.
+                {% else %}
+                    не указана
+                {% endif %}
+            {% if object.current_harvest %}
+            <br>Регистрация услуги: {{ object.current_harvest.harvest_date|date:'d.m.Y' }}
+            {% endif %}
+            </h3>
+<!--            <p>Первая регистрация: {{ object.created_at|date:'d.m.Y' }}<br/>-->
+<!--                Последние изменения: {{ object.changed_at|date:'d.m.Y' }}</p>-->
+            <a href="{% url 'catalog:index' %}" class="text-white">На главную</a>
+
+            {% if perms.proudct_can_moderate or product.owner == user %}
+            <a href="{% url 'catalog:update' object.pk %}" class="text-white ps-4">Изменить услугу</a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'catalog:create' %}" class="text-white ps-4">Добавить услугу</a>
+            {% endif %}
+        </div>
+        <div class="col-6 p-0 text-end align-self-center">
+            <img src="{% mediapath product.image%}" class="img-fluid" alt="{{ product.name }}">
+        </div>
+    </div>
+</div>
+{% endblock %}
