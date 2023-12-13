@@ -51,18 +51,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name|slice:':23' }}</h5>
                             <p class="card-text mb-0">Цена: {{ product.price }} Руб.</p>
-<!--                            {% if product.current_harvest %}-->
-<!--                            <p class="card-text">Cбор урожая: {{ product.current_harvest.harvest_date|date:'d.m.Y' }}</p>-->
-<!--                            {% endif %}-->
                         </div>
                         <div class="card-footer text-center">
-<!--                            <a href="#"-->
-<!--                               class="btn btn-warning-->
-<!--                                      {% bg_dark_color forloop.parentloop.counter %}-->
-<!--                                      text-white border-0">-->
-<!--                                Добавить в корзину-->
-<!--                            </a>-->
-                            {% if perms.catalog.can_moderate or product.owner == user %}
+                            {% if perms.catalog.product.owner == user %}
                             <a href="{% url 'catalog:update' product.pk %}"
                                class="btn btn-warning
                                       {% bg_dark_color forloop.parentloop.counter %}

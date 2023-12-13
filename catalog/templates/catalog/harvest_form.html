@@ -41,8 +41,6 @@
             <h1 class="pt-4">{{ harvest.product.name }}</h1>
             <p class="fs-5">{{ harvest.product.description }}</p>
             <h3 class="py-4">Цена: {{ harvest.product.price }} Руб.</h3>
-<!--            <p>Первая регистрация: {{ harvest.product.created_at|date:'d.m.Y' }}<br/>-->
-<!--                Последние изменения: {{ harvest.product.changed_at|date:'d.m.Y' }}</p>-->
         </div>
         {% else %}
         <div class="col-6 px-5 pt-1 fs-5">
@@ -51,8 +49,6 @@
             <h1 class="pt-4">{{ product.name }}</h1>
             <p class="fs-5">{{ product.description }}</p>
             <h3 class="py-4">Цена: {{ product.price }} Руб.</h3>
-<!--            <p>Первые поставки: {{ product.created_at|date:'d.m.Y' }}<br/>-->
-<!--                Последние изменения: {{ product.changed_at|date:'d.m.Y' }}</p>-->
         </div>
         {% endif %}
 

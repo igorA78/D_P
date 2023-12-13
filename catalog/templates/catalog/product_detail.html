@@ -22,11 +22,8 @@
             <br>Регистрация услуги: {{ object.current_harvest.harvest_date|date:'d.m.Y' }}
             {% endif %}
             </h3>
-<!--            <p>Первая регистрация: {{ object.created_at|date:'d.m.Y' }}<br/>-->
-<!--                Последние изменения: {{ object.changed_at|date:'d.m.Y' }}</p>-->
             <a href="{% url 'catalog:index' %}" class="text-white">На главную</a>
-
-            {% if perms.proudct_can_moderate or product.owner == user %}
+            {% if perms.product.owner == user %}
             <a href="{% url 'catalog:update' object.pk %}" class="text-white ps-4">Изменить услугу</a>
             {% endif %}
             {% if request.user.is_authenticated %}
